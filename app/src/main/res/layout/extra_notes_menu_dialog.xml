@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/_20dp"
+    android:background="@drawable/bg_dialog"
+    android:orientation="vertical">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/dialog_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:padding="@dimen/_10dp"
+        android:background="@drawable/ripple_effect"
+        android:src="@drawable/delete_icon"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/_10dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/change_background"
+            style="@style/TextView.Font.Regular.10"
+            android:layout_marginVertical="@dimen/_5dp"
+            android:textColor="@color/dark_grey"/>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:scrollIndicators="none">
+            <RadioGroup
+                android:id="@+id/rg_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:foreground="@drawable/selector_cirlce"
+                    android:background="@drawable/checkbox__1_"
+                    android:backgroundTint="@color/white"
+                    android:layout_margin="@dimen/_10dp"/>
+
+                <RadioButton
+                    android:id="@+id/rb_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:foreground="@drawable/selector_cirlce"
+                    android:background="@drawable/checkbox__1_"
+                    android:backgroundTint="@color/primary_light"
+                    android:layout_margin="@dimen/_10dp"/>
+                <RadioButton
+                    android:id="@+id/rb_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:background="@drawable/checkbox__1_"
+                    android:backgroundTint="@color/light_red"
+                    android:foreground="@drawable/selector_cirlce"
+                    android:layout_margin="@dimen/_10dp"/>
+                <RadioButton
+                    android:id="@+id/rb_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:background="@drawable/checkbox__1_"
+                    android:backgroundTint="@color/light_green"
+                    android:foreground="@drawable/selector_cirlce"
+                    android:layout_margin="@dimen/_10dp"/>
+                <RadioButton
+                    android:id="@+id/rb_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:background="@drawable/checkbox__1_"
+                    android:backgroundTint="@color/light_yellow"
+                    android:foreground="@drawable/selector_cirlce"
+                    android:layout_margin="@dimen/_10dp"/>
+                <RadioButton
+                    android:id="@+id/rb_6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:background="@drawable/checkbox__1_"
+                    android:backgroundTint="@color/light_yellow_2"
+                    android:foreground="@drawable/selector_cirlce"
+                    android:layout_margin="@dimen/_10dp"/>
+                <RadioButton
+                    android:id="@+id/rb_7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:background="@drawable/checkbox__1_"
+                    android:backgroundTint="@color/light_grey"
+                    android:foreground="@drawable/selector_cirlce"
+                    android:layout_margin="@dimen/_10dp"/>
+            </RadioGroup>
+        </HorizontalScrollView>
+
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/_10dp"
+            app:dividerColor="@color/base_grey"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/_10dp"
+            android:text="@string/extras"
+            style="@style/TextView.Font.Regular.10"
+            android:textColor="@color/dark_grey"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/note_achieve"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/_10dp">
+
+                <ImageView
+                    android:id="@+id/archive_image"
+                    android:layout_width="@dimen/_24dp"
+                    android:layout_height="@dimen/_24dp"
+                    android:src="@drawable/folder_upload" />
+
+                <TextView
+                    style="@style/TextView.Font.Medium.16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_20dp"
+                    android:text="@string/archive"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/note_delete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/_10dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/trash"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/delete_note"
+                    style="@style/TextView.Font.Medium.16"
+                    android:textColor="@color/base_red"
+                    android:layout_marginHorizontal="@dimen/_20dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

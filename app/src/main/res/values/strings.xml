@@ -1,0 +1,130 @@
+<resources>
+    <string name="app_name">MyNote</string>
+
+    <!--    side nav bar-->
+
+    <string name="nav_open">open</string>
+    <string name="nav_close">close</string>
+    <!--   api errors-->
+    <string name="unexpected_response">Unexpected response from server!</string>
+    <string name="parsing_error">Parsing error! Please try again after some time!!</string>
+    <string name="connection_timeout">Request Time Out! Please check your internet connection and try again!</string>
+    <string name="no_internet">There is no internet connection! Please make sure you have active internet connection!</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="unknown_error">Unknown Error</string>
+
+    <!--    image picker dialog-->
+    <string name="choose_image">Choose Image</string>
+    <string name="please_allow_given_permission">please allow given permission</string>
+
+    <string name="required_permission">Permission Required</string>
+    <string name="permission_description">The app will need storage permission to upload photo on your phone.\nPlease press Ok to enable Permissions.</string>
+    <string name="cancel">Cancel</string>
+    <string name="logout">Logout</string>
+    <string name="do_you_want_to_logout">Do you want to logout?\nyou will not be able to get important notifications</string>
+    <string name="no_data_found">No Data Found</string>
+    <string name="ok">Ok</string>
+    <string name="search_your_notes">Search your notes</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="notes">Notes</string>
+    <string name="archive">Archive</string>
+    <string name="deleted">Deleted</string>
+    <string name="settings">Settings</string>
+    <string name="title">Title</string>
+    <string name="write_note_here">Write note here ...</string>
+    <string name="edited_time_date">Edited time date</string>
+    <string name="let_s_login">Let’s Login</string>
+    <string name="and_notes_your_idea">And notes your idea</string>
+    <string name="email_address">Email Address</string>
+    <string name="example_abc_xyz_com">Example: abc@xyz.com</string>
+    <string name="password">Password</string>
+    <string name="password_hint">********</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="login">Login</string>
+    <string name="or">or</string>
+    <string name="login_with_google">Login with Google</string>
+    <string name="don_t_have_any_account">Don’t have any account?</string>
+    <string name="register_here">\tRegister here</string>
+    <string name="full_name">Full Name</string>
+    <string name="example_john_doe">Example: John Doe</string>
+    <string name="retype_password">Retype Password</string>
+    <string name="back_to_login">Back to Login</string>
+    <string name="register">Register</string>
+    <string name="and_start_taking_notes">And start taking notes</string>
+    <string name="register_with_google">Register with Google</string>
+    <string name="login_here">\t Login here</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="insert_your_email_address_to_receive_a_code_for_creating_a_new_password">Insert your email address to receive a code for creating a new password</string>
+    <string name="send_code">Send Code</string>
+    <string name="create_a_new_password">Create a New Password</string>
+    <string name="your_new_password_should_be_different_from_the_previous_password">Your new password should be different from the previous password</string>
+    <string name="back">Back</string>
+    <string name="change_password">Change Password</string>
+    <string name="please_input_your_current_password_first">Please input your current password first</string>
+    <string name="now_create_your_new_password">Now, create your new password</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="submit_new_password">Submit New Password</string>
+    <string name="what_do_you_want_to_notes">What Do You Want to Notes?</string>
+    <string name="interesting_idea">Interesting Idea</string>
+    <string name="use_free_text_area_feel_free_to_write_it_all">Use free text area, feel free to write it all</string>
+    <string name="buying_something">Buying Something</string>
+    <string name="use_checklist_so_you_won_t_miss_anything">Use checklist, so you won’t miss anything</string>
+    <string name="goals">Goals</string>
+    <string name="near_future_goals_notes_and_keep_focus">Near/future goals, notes and keep focus</string>
+    <string name="routine_tasks">Routine Tasks</string>
+    <string name="checklist_with_sub_checklist">Checklist with sub-checklist</string>
+    <string name="let_s_get_started">Let’s Get Started</string>
+    <string name="jot_down_anything_you_want_to_achieve_today_or_in_the_future">Jot Down anything you want to achieve, today or in the future</string>
+    <string name="text_2">Your notebook, your world.\n</string>
+    <string name="text_3">Jot your dreams. Build your reality.\n</string>
+    <string name="text_4">Capture your thoughts. Achieve your goals.</string>
+    <string name="add_checkbox">Add checkbox</string>
+    <string name="active_notes">ACTIVE NOTES</string>
+    <string name="completed_notes">COMPLETED NOTES</string>
+    <string name="add_notes">Add Notes</string>
+    <string name="change_background">CHANGE BACKGROUND</string>
+    <string name="extras">EXTRAS</string>
+    <string name="delete_note">Delete Note</string>
+    <string name="new_notes">New Notes</string>
+    <string name="start_your_journey">Start Your Journey</string>
+    <string name="every_big_step_start_with_small_step_notes_your_first_idea_and_start_your_journey">Every big step start with small step. Notes your first idea and start your journey!</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="app_settings">APP SETTINGS</string>
+    <string name="text_size">Text Size</string>
+    <string name="medium">Medium</string>
+    <string name="log_out">Log Out</string>
+    <string name="change_image">Change Image</string>
+    <string name="changing_email_address_information_means_you_need_to_re_login_to_the_apps">Changing email address information means you need to re-login to the apps.</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="are_you_sure_you_want_to_log_out_from_the_application">Are you sure you want to log out from the application?</string>
+    <string name="yes">Yes</string>
+    <string name="push_notifications">Push Notifications</string>
+    <string name="enter_a_valid_email">enter a valid email!</string>
+    <string name="enter_a_valid_password">enter a valid password!</string>
+    <string name="password_are_not_match">password are not match!</string>
+    <string name="enter_a_your_name">enter a your name!</string>
+    <string name="no_routine_tasks_yet">No routine tasks yet</string>
+    <string name="once_you_add_tasks_they_will_appear_here_let_s_start_organizing_your_day">Once you add tasks, they will appear here. Let’s start organizing your day!</string>
+    <string name="no_goals_set_yet">No goals set yet</string>
+    <string name="once_you_set_your_goals_they_ll_appear_here_let_s_start_your_journey_towards_success">Once you set your goals, they’ll appear here. Let’s start your journey towards success!</string>
+    <string name="no_purchases_planned_yet">No purchases planned yet</string>
+    <string name="when_you_re_ready_to_shop_your_buying_list_will_show_up_here_let_s_add_something_to_your_list">When you\'re ready to shop, your buying list will show up here. Let’s add something to your list!</string>
+    <string name="no_interesting_ideas_yet">No interesting ideas yet</string>
+    <string name="no_deleted_items_yet">No deleted items yet</string>
+    <string name="when_you_remove_something_it_will_show_up_here_let_s_clean_up_and_keep_things_tidy">When you remove something, it will show up here. Let’s clean up and keep things tidy!</string>
+    <string name="no_archived_items_yet">No archived items yet</string>
+    <string name="once_you_archive_something_it_will_appear_here_let_s_start_organizing_your_past">Once you archive something, it will appear here. Let’s start organizing your past!</string>
+    <string name="notifications">Notifications</string>
+    <string name="item_name">item name</string>
+    <string name="save">Save</string>
+    <string name="colors">Colors</string>
+
+    <string-array name="spinner_items">
+        <item>small</item>
+        <item>medium</item>
+        <item>large </item>
+    </string-array>
+
+</resources>

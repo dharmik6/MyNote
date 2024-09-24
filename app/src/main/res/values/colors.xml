@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="black_20">#33000000</color>
+    <color name="black_60">#99000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+
+    <color name="primary_base">#6A3EA1</color>
+    <color name="primary_dark">#3A2258</color>
+    <color name="primary_light">#EFE9F7</color>
+    <color name="background">#FAF8FC</color>
+    <color name="light_grey">#EFEEF0</color>
+    <color name="base_grey">#C8C5CB</color>
+    <color name="dark_grey">#827D89</color>
+    <color name="transparent">#00000000</color>
+    <color name="dark_green">#1F7F40</color>
+    <color name="base_green">#60D889</color>
+    <color name="base_yellow">#F8C715</color>
+    <color name="dark_yellow">#725A03</color>
+    <color name="light_red">#F7DEE3</color>
+    <color name="base_red">#CE3A54</color>
+    <color name="light_green">#DAF6E4</color>
+    <color name="light_yellow">#FDEBAB</color>
+    <color name="light_yellow_2">#F7F6D4</color>
+
+
+    <color name="color_1">#E0F2D7</color>
+    <color name="color_2">#F2D3D0</color>
+    <color name="color_4">#E3F2DF</color>
+    <color name="color_5">#C5D9D5</color>
+    <color name="color_6">#a9def9</color>
+    <color name="color_3">#e7cee3</color>
+
+</resources>

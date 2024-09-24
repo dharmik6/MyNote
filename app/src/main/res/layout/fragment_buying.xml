@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background"
+    tools:context=".ui.fragment.BuyingFragment"
+    android:id="@+id/swipe_refresh">
+
+
+    <ViewAnimator
+        android:id="@+id/view_note_animator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:measureAllChildren="true"
+        android:paddingHorizontal="@dimen/_20dp">
+
+
+
+        <!--        0-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:padding="@dimen/_20dp"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/illustration__2_"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_purchases_planned_yet"
+                style="@style/TextView.Font.Bold.24"
+                android:textAlignment="center"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/_20dp"
+                android:text="@string/when_you_re_ready_to_shop_your_buying_list_will_show_up_here_let_s_add_something_to_your_list"
+                style="@style/TextView.Font.Regular.14"
+                android:textAlignment="center"
+                android:textColor="@color/black"/>
+
+
+        </LinearLayout>
+
+        <!--        1-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_buying"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            tools:listitem="@layout/notes_item_1"
+            android:paddingBottom="@dimen/_50dp"
+            android:overScrollMode="never" />
+
+        <!--    2-->
+        <include layout="@layout/notes_shimmer"/>
+
+    </ViewAnimator>
+
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

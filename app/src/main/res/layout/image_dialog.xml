@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_bottom_sheet"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    app:behavior_hideable="true"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
+
+        <TextView
+            android:id="@+id/txt_title"
+            style="@style/TextView.Font.Medium.14"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/_12dp"
+            android:text="@string/choose_image"
+            android:textColor="@color/black" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10dp"
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_marginEnd="@dimen/_10dp"
+            android:layout_marginBottom="@dimen/_10dp"
+            android:background="?selectableItemBackground"
+            android:padding="@dimen/_6dp"
+            android:src="@drawable/ic_close"
+            app:tint="@color/black" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/_10dp">
+
+        <LinearLayout
+            android:id="@+id/linear_camera"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?selectableItemBackground"
+            android:orientation="vertical"
+            android:padding="@dimen/_10dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/_54dp"
+                android:layout_height="@dimen/_54dp"
+                android:layout_gravity="center"
+                android:padding="@dimen/_8dp"
+                android:tint="@color/primary_base"
+                app:srcCompat="@drawable/ic_camera" />
+
+            <TextView
+                style="@style/TextView.Font.Regular.14"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_5dp"
+                android:gravity="center"
+                android:text="Camera"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_gallery"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?selectableItemBackground"
+            android:orientation="vertical"
+            android:padding="@dimen/_10dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/_54dp"
+                android:layout_height="@dimen/_54dp"
+                android:layout_gravity="center"
+                android:padding="@dimen/_8dp"
+                app:srcCompat="@drawable/ic_album"
+                app:tint="@color/primary_base" />
+
+            <TextView
+                style="@style/TextView.Font.Regular.14"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_5dp"
+                android:gravity="center"
+                android:text="Gallery"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

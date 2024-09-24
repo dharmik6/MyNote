@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="end"
+    android:background="@drawable/bg_dialog"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="@dimen/_20dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/light_grey"
+        style="@style/CardView.Stroke.Round">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/delete_icon"
+            app:tint="@color/black"
+            android:padding="@dimen/_5dp"/>
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginVertical="@dimen/_20dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/push_notifications"
+            android:textColor="@color/black"
+            android:layout_centerVertical="true"
+            style="@style/TextView.Font.Medium.16"/>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/mySwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:thumb="@drawable/switch_thumb"
+            android:theme="@style/Switch"
+            app:useMaterialThemeColors="false"
+            app:thumbTint="@null"
+            app:thumbTintMode="src_in"
+            app:track="@drawable/switch_track"
+            app:trackTint="@null" />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

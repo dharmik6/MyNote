@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/_10dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:weightSum="5"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/itemCheckbox"
+            android:layout_width="@dimen/_22dp"
+            android:layout_height="@dimen/_22dp"
+            android:background="@drawable/selector_notes_check_2"
+            android:button="@null"/>
+        <EditText
+            android:id="@+id/itemText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/TextView.Font.Medium.16"
+            android:hint="@string/title"
+            android:background="@color/transparent"
+            android:layout_weight="5"
+            android:layout_marginHorizontal="@dimen/_10dp"
+            android:textColor="@color/black"/>
+
+        <ImageView
+            android:id="@+id/trash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10dp"
+            app:tint="@color/dark_grey"
+            android:src="@drawable/delete_icon"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSubItems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/_15dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="3"
+        tools:listitem="@layout/buying_item" />
+
+    <LinearLayout
+        android:id="@+id/add_sub_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/_15dp"
+        android:padding="@dimen/_10dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/_10dp"
+            android:src="@drawable/plus"
+            app:tint="@color/primary_base" />
+
+        <TextView
+            style="@style/TextView.Font.Medium.14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_checkbox"
+            android:textColor="@color/primary_base" />
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragment.HomeFragment"
+    android:paddingBottom="@dimen/_50dp"
+    android:background="@color/background"
+    android:id="@+id/home_swipe">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ViewAnimator
+            android:id="@+id/view_note_animator"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:measureAllChildren="true"
+            android:paddingHorizontal="@dimen/_20dp">
+
+            <!--        0-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:padding="@dimen/_40dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/illustration__1_"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/start_your_journey"
+                    style="@style/TextView.Font.Bold.24"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingTop="@dimen/_20dp"
+                    android:text="@string/every_big_step_start_with_small_step_notes_your_first_idea_and_start_your_journey"
+                    style="@style/TextView.Font.Regular.14"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/direction"
+                    android:layout_marginVertical="@dimen/_20dp"/>
+            </LinearLayout>
+
+            <!--        1-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_notes_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                tools:listitem="@layout/notes_item" />
+
+            <!--    2-->
+            <include layout="@layout/notes_shimmer"/>
+
+        </ViewAnimator>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

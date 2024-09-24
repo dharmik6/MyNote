@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/section_1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/side_menu_notes"
+            android:title="@string/notes" />
+    </group>
+
+    <group
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_idea_idea"
+            android:title="@string/interesting_idea" />
+        <item
+            android:id="@+id/menu_idea_buying"
+            android:title="@string/buying_something" />
+        <item
+            android:id="@+id/menu_idea_goals"
+            android:title="@string/goals" />
+        <item
+            android:id="@+id/menu_idea_routine"
+            android:title="@string/routine_tasks" />
+    </group>
+
+    <group android:id="@+id/section_2"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/side_menu_achive"
+            android:title="@string/archive"
+            />
+
+
+    </group>
+    <group>
+        <item
+            android:id="@+id/side_menu_settings"
+            android:title="@string/settings" />
+    </group>
+
+</menu>

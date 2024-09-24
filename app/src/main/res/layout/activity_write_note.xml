@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:paddingTop="@dimen/_20dp"
+    tools:context=".ui.activity.WriteNoteActivity">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_10dp"
+        android:layout_marginTop="@dimen/_20dp">
+
+        <LinearLayout
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="top"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/_10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/cheveron_left" />
+
+            <TextView
+                style="@style/TextView.Font.Bold.16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/_10dp"
+                android:text="@string/back"
+                android:textColor="@color/primary_base" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save"
+            style="@style/TextView.Font.Bold.16"
+            android:textColor="@color/primary_base"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/_10dp"
+            android:background="@drawable/ripple_effect"/>
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_tools"
+        android:scrollbars="none"
+        android:overScrollMode="never"
+        android:layout_below="@+id/header"
+        android:fillViewport="true">
+
+        <ViewAnimator
+            android:id="@+id/view_note_animator"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:measureAllChildren="true"
+            android:paddingHorizontal="@dimen/_20dp">
+
+
+            <!--  page 0-->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:scrollIndicators="none">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_images"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="0dp"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"
+                    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                    app:spanCount="2"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/image_item" />
+
+                <EditText
+                    android:id="@+id/title"
+                    style="@style/TextView.Font.Bold.32"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rv_images"
+                    android:layout_marginVertical="@dimen/_10dp"
+                    android:background="@color/transparent"
+                    android:hint="@string/title"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/dark_grey" />
+
+                <EditText
+                    android:id="@+id/note"
+                    style="@style/TextView.Font.Regular.16"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/title"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/transparent"
+                    android:gravity="start"
+                    android:hint="@string/write_note_here"
+                    android:textColor="@color/dark_grey" />
+
+            </RelativeLayout>
+
+            <!--  page 1-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/list_title"
+                        style="@style/TextView.Font.Bold.32"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/_10dp"
+                        android:background="@color/transparent"
+                        android:hint="@string/title"
+                        android:textColorHint="@color/dark_grey" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_buying_item"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        android:orientation="vertical"
+                        tools:listitem="@layout/buying_item" />
+
+                    <LinearLayout
+                        android:id="@+id/add_item"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_10dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/_10dp"
+                            android:src="@drawable/plus"
+                            app:tint="@color/primary_base" />
+
+                        <TextView
+                            style="@style/TextView.Font.Medium.14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/add_checkbox"
+                            android:textColor="@color/primary_base" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+            <!--  page 2-->
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/goal_title"
+                        style="@style/TextView.Font.Bold.32"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/_10dp"
+                        android:background="@color/transparent"
+                        android:hint="@string/title"
+                        android:textColorHint="@color/dark_grey" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_goal_item"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:nestedScrollingEnabled="false"
+                        tools:itemCount="2"
+                        tools:listitem="@layout/goals_item" />
+
+                    <LinearLayout
+                        android:id="@+id/add_goal_item"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_10dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="@dimen/_10dp"
+                            android:src="@drawable/plus"
+                            app:tint="@color/primary_base" />
+
+                        <TextView
+                            style="@style/TextView.Font.Medium.14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/add_checkbox"
+                            android:textColor="@color/primary_base" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            <!--  page 3-->
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:scrollbars="none"
+                android:scrollIndicators="none"
+                android:overScrollMode="never"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingVertical="@dimen/_10dp">
+
+                    <EditText
+                        android:id="@+id/task_title"
+                        style="@style/TextView.Font.Bold.32"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/_10dp"
+                        android:background="@color/transparent"
+                        android:hint="@string/title"
+                        android:textColorHint="@color/dark_grey" />
+
+
+                    <TextView
+                        style="@style/TextView.Font.Regular.12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/_10dp"
+                        android:text="@string/active_notes"
+                        android:textColor="@color/dark_grey" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvCheckedItems"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:itemCount="2"
+                        android:scrollbars="none"
+                        android:overScrollMode="never"
+                        android:nestedScrollingEnabled="true"
+                        tools:listitem="@layout/notes_sub_item" />
+
+                    <com.google.android.material.divider.MaterialDivider
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginVertical="@dimen/_20dp"
+                        app:dividerColor="@color/base_grey" />
+
+                    <TextView
+                        style="@style/TextView.Font.Regular.12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/_10dp"
+                        android:text="@string/completed_notes"
+                        android:textColor="@color/dark_grey" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvUncheckedItems"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"
+                        tools:itemCount="2"
+                        android:overScrollMode="never"
+                        android:nestedScrollingEnabled="true"
+                        tools:listitem="@layout/notes_sub_item" />
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+
+
+        </ViewAnimator>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/add_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/primary_base"
+        app:cardCornerRadius="@dimen/_50dp"
+        app:cardElevation="@dimen/_5dp"
+        android:layout_above="@+id/bottom_tools"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="@dimen/_20dp"
+        android:visibility="invisible"
+        >
+        <ImageView
+            android:layout_width="@dimen/_30dp"
+            android:layout_height="@dimen/_30dp"
+            android:src="@drawable/plus"
+            android:layout_margin="@dimen/_10dp"/>
+    </com.google.android.material.card.MaterialCardView>
+
+    <RelativeLayout
+        android:id="@+id/bottom_tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dividerColor="@color/base_grey" />
+
+        <TextView
+            android:id="@+id/edited_time"
+            style="@style/TextView.Font.Regular.12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/search"
+            android:paddingHorizontal="@dimen/_20dp"
+            android:text="@string/edited_time_date" />
+
+        <ImageView
+            android:id="@+id/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/pin"
+            android:visibility="gone"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="@dimen/_20dp"
+            android:src="@drawable/search" />
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/pin"
+            android:layout_width="24dp"
+            android:layout_height="@dimen/_24dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_20dp"
+            android:layout_toStartOf="@+id/menu"
+            android:background="@drawable/selector_pin"
+            android:button="@null" />
+
+        <ImageView
+            android:id="@+id/menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="@color/primary_base"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:padding="@dimen/_20dp"
+            android:rotation="90"
+            android:src="@drawable/ellipsis_vertical"
+            app:tint="@color/white" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
