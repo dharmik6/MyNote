@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -50,6 +51,7 @@ class GoalsFragment : BaseFragment(), OnClickListener, OnLongClickListener, OnCo
 
         setRecyclerView()
         getData()
+        onBackPress()
         (activity as HomeActivity).binding.layout.setOnCheckedChangeListener{ btn ,ischecked ->
 
             if (ischecked){
@@ -108,7 +110,10 @@ class GoalsFragment : BaseFragment(), OnClickListener, OnLongClickListener, OnCo
                     if (!data.isNullOrEmpty()) {
                         val filteredData = data.filter { it.type == 2 && !it.isArchived }
 
-                        adapter.addItems(filteredData)
+                        if (filteredData.isNotEmpty()) {
+                            adapter.addItems(filteredData)
+                        } else
+                            binding.viewNoteAnimator.displayedChild = 0
 
                         Log.d(TAG, "observer: filteredData = $filteredData")
                     }
@@ -206,4 +211,24 @@ class GoalsFragment : BaseFragment(), OnClickListener, OnLongClickListener, OnCo
 
     }
 
+    fun onBackPress(){
+
+        requireActivity().onBackPressedDispatcher.addCallback(requireActivity(), object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val homeActivity = activity as? HomeActivity
+                homeActivity?.let {
+                    if (it.binding.viewAnimatorToolbar.displayedChild == 1) {
+                        it.binding.viewAnimatorToolbar.displayedChild = 0
+                        adapter.isMenuOpen = false
+                        adapter.deSelectList()
+                    } else {
+                        this.isEnabled = false
+                        requireActivity().onBackPressedDispatcher.onBackPressed()
+                        this.isEnabled = true
+                    }
+                } ?: requireActivity().finish()
+            }
+        })
+
+    }
 }

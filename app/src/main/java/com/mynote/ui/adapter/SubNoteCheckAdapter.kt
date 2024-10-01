@@ -2,6 +2,8 @@ package com.mynote.ui.adapter
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Color
+import android.graphics.Paint
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -31,11 +33,15 @@ class SubNoteCheckAdapter(
             // Remove the listener to avoid unnecessary triggers
             binding.checkbox.setOnCheckedChangeListener(null)
 
+            binding.titleText.paint.flags = binding.titleText.paint.flags or Paint.STRIKE_THRU_TEXT_FLAG
+            binding.noteText.paint.flags = binding.noteText.paint.flags or Paint.STRIKE_THRU_TEXT_FLAG
+
             // Set the item name and checkbox state
             binding.titleText.setText(subNote.title)
             binding.noteText.setText(subNote.noteText)
             binding.checkbox.isChecked = subNote.isChecked ?: false
 
+            binding.mainCard.setCardBackgroundColor(Color.parseColor(if (subNote.color != null) subNote.color else "#FDEBAB" ))
             // Add the listener back with the updated item
             binding.checkbox.setOnCheckedChangeListener { _, isChecked ->
                 subNote.isChecked = isChecked
@@ -103,7 +109,8 @@ class SubNoteCheckAdapter(
             val subNote = NotesParam.SubNote(
                 isChecked = item.isChecked,
                 noteText = item.noteText,
-                title = item.title
+                title = item.title,
+                color = item.color
             )
             listener.onSubNoteUnCheckedChangeListener(subNote)
 

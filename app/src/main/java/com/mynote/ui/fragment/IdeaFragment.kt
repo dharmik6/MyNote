@@ -100,7 +100,10 @@ class IdeaFragment : BaseFragment(), OnClickListener, OnLongClickListener, OnCol
                     if (!data.isNullOrEmpty()) {
                         val filteredData = data.filter { it.type == 0 && !it.isArchived }
 
-                        adapter.addItems(filteredData)
+                        if (filteredData.isNotEmpty()) {
+                            adapter.addItems(filteredData)
+                        } else
+                            binding.viewNoteAnimator.displayedChild = 0
 
                         Log.d(TAG, "observer: filteredData = $filteredData")
                     } else
@@ -198,5 +201,14 @@ class IdeaFragment : BaseFragment(), OnClickListener, OnLongClickListener, OnCol
         adapter.isMenuOpen = false
         adapter.deSelectList()
 
+    }
+    fun onBackPress() : Boolean{
+        if ((activity as? HomeActivity)!!.binding.viewAnimatorToolbar.displayedChild == 1){
+            (activity as? HomeActivity)!!.binding.viewAnimatorToolbar.displayedChild = 0
+            adapter.isMenuOpen = false
+            adapter.deSelectList()
+            return false
+        }
+        return true
     }
 }

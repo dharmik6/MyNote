@@ -28,7 +28,9 @@ class TextDialog : BottomSheetDialogFragment(), View.OnClickListener,
     private val binding by viewBinding { TextDialogBinding.inflate(layoutInflater) }
     val sizes = arrayOf("Small", "Medium", "Large")
     private val TAG = "TextDialog"
-    var selectedSize = 1
+    var selectedSize = -1
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,8 +39,6 @@ class TextDialog : BottomSheetDialogFragment(), View.OnClickListener,
         setListener()
 
         binding.spinner.onItemSelectedListener = this
-
-        selectedSize = mPrefUtils.getTextSize()
 
         val adapter = ArrayAdapter.createFromResource(
             requireContext(),
@@ -69,8 +69,7 @@ class TextDialog : BottomSheetDialogFragment(), View.OnClickListener,
         val updatedConfiguration = Configuration(configuration)
         updatedConfiguration.fontScale = scale
 
-        val context =
-            requireContext().applicationContext.createConfigurationContext(updatedConfiguration)
+        val context = requireContext().applicationContext.createConfigurationContext(updatedConfiguration)
 
         requireContext().resources.updateConfiguration(updatedConfiguration, metrics)
 
@@ -89,18 +88,21 @@ class TextDialog : BottomSheetDialogFragment(), View.OnClickListener,
     override fun onDestroy() {
         super.onDestroy()
         Log.d(TAG, "onDestroy: selectedSize = $selectedSize")
-        when (selectedSize) {
-            0 -> {
-                adjustFontScale(resources.configuration, 0.8f)
+        if (selectedSize != -1){
+            mPrefUtils.saveTextSize(selectedSize)
 
-            }
+            when (selectedSize) {
+                0 -> {
+                    adjustFontScale(resources.configuration, 0.8f)
+                }
 
-            1 -> {
-                adjustFontScale(resources.configuration, 1.0f)
-            }
+                1 -> {
+                    adjustFontScale(resources.configuration, 1.0f)
+                }
 
-            2 -> {
-                adjustFontScale(resources.configuration, 1.2f)
+                2 -> {
+                    adjustFontScale(resources.configuration, 1.2f)
+                }
             }
         }
     }
@@ -108,7 +110,6 @@ class TextDialog : BottomSheetDialogFragment(), View.OnClickListener,
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         Log.d(TAG, "onItemSelected: selected text size = ${sizes[position]}")
-        mPrefUtils.saveTextSize(position)
         selectedSize = position
     }
 

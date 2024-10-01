@@ -29,16 +29,13 @@ class NotesAdapter(
     private val context: Context,
     private val list: MutableList<NotesParam>,
     private val longClickListener: LongClickListener
-) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+) : RecyclerView.Adapter<ViewHolder>() {
 
-        var isMenuOpen = false
+    var isMenuOpen = false
 
     val TAG = "NotesAdapter"
 
-
     class ViewModel(val binding: ViewBinding) : RecyclerView.ViewHolder(binding.root)
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewModel {
         val binding = when (viewType) {
@@ -59,13 +56,10 @@ class NotesAdapter(
                 NotesItemBinding.inflate(LayoutInflater.from(context), parent, false)
             }
         }
-
-
         return ViewModel(binding)
     }
 
-
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.itemView.setOnLongClickListener {
             isMenuOpen = true
@@ -85,10 +79,6 @@ class NotesAdapter(
                             holder.binding.main.strokeWidth = 1
                         }
 
-
-                        holder.binding.rvImages.setOnClickListener {
-                            context.showToast("hello")
-                        }
                     }
 
                     is NotesItem1Binding -> {
@@ -100,8 +90,11 @@ class NotesAdapter(
                             holder.binding.main.strokeWidth = 1
                         }
 
-                        holder.binding.rvMiniList.setOnClickListener {
-                            context.showToast("hello")
+                        holder.binding.clickableView.setOnClickListener {
+                            holder.itemView.performClick()
+                        }
+                        holder.binding.clickableView.setOnLongClickListener {
+                            holder.itemView.performLongClick()
                         }
                     }
 
@@ -116,6 +109,13 @@ class NotesAdapter(
 
                         holder.binding.rvMiniGoalList.setClickable(false);
                         holder.binding.rvMiniGoalList.setEnabled(false);
+
+                        holder.binding.clickableView.setOnClickListener {
+                            holder.itemView.performClick()
+                        }
+                        holder.binding.clickableView.setOnLongClickListener {
+                            holder.itemView.performLongClick()
+                        }
                     }
 
                     is NotesItem3Binding -> {
@@ -129,6 +129,13 @@ class NotesAdapter(
 
                         holder.binding.rvMinCheck.setClickable(false);
                         holder.binding.rvMinCheck.setEnabled(false);
+
+                        holder.binding.clickableView.setOnClickListener {
+                            holder.itemView.performClick()
+                        }
+                        holder.binding.clickableView.setOnLongClickListener {
+                            holder.itemView.performLongClick()
+                        }
                     }
                 }
             }
@@ -150,8 +157,6 @@ class NotesAdapter(
         }
 
     }
-
-
 
     fun setSelectItem(position: Int,holder: ViewHolder) {
             if(list[position].isSelected)
@@ -206,20 +211,13 @@ class NotesAdapter(
             }
         }
 
-
     private fun setDataItem(binding: NotesItemBinding, item: NotesParam) {
         binding.noteNote.text = item.noteText
         binding.noteTitle.text = item.title
         if (!item.color.isNullOrBlank()) {
             binding.main.setCardBackgroundColor(Color.parseColor(item.color))
         }
-
     }
-
-
-
-
-
     private fun setAnimation(viewToAnimate: View) {
         val context = viewToAnimate.context
         val animation = AnimationUtils.loadAnimation(context, R.anim.slide_in_left)
@@ -231,7 +229,6 @@ class NotesAdapter(
         if (!item.color.isNullOrBlank()) {
             binding.main.setCardBackgroundColor(Color.parseColor(item.color))
         }
-
 
         val nonNullItems = item.items?.filterNotNull() ?: emptyList()
         binding.rvMiniList.layoutManager = LinearLayoutManager(context)
@@ -245,12 +242,10 @@ class NotesAdapter(
             binding.main.setCardBackgroundColor(Color.parseColor(item.color))
         }
 
-
         val nonNullItems = item.items?.filterNotNull() ?: emptyList()
         binding.rvMiniGoalList.layoutManager = LinearLayoutManager(context)
         val adapter = MiniGoalAdapter(context, nonNullItems)
         binding.rvMiniGoalList.adapter = adapter
-
     }
 
     private fun setData3Item(binding: NotesItem3Binding, item: NotesParam) {
@@ -271,7 +266,6 @@ class NotesAdapter(
         binding.rvMinUncheck.layoutManager = LinearLayoutManager(context)
         val uncheckedAdapter = MiniSubNoteUnCheckedAdapter(context, unCheckedItems)
         binding.rvMinUncheck.adapter = uncheckedAdapter
-
     }
 
     override fun getItemCount() = list.size
@@ -296,7 +290,6 @@ class NotesAdapter(
         notifyDataSetChanged()
     }
 
-    // filter
     fun removeSelectedItems() {
         val indicesToRemove = mutableListOf<Int>()
 
@@ -338,11 +331,9 @@ class NotesAdapter(
         }
     }
 
-
     fun getSelectedItemList() : List<NotesParam>{
         val selectedList   = list.filter { it.isSelected == true }
         return selectedList
     }
-
 
 }

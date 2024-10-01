@@ -228,6 +228,7 @@
                 android:textColor="@color/black" />
 
             <TextView
+                android:id="@+id/text_size"
                 style="@style/TextView.Font.Regular.12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

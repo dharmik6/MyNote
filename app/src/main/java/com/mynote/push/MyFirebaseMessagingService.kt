@@ -9,17 +9,29 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.mynote.R
 import com.project.app.utils.AppConstant
+import com.project.app.utils.PrefUtils
+import com.project.app.utils.extension.showToast
 import com.project.app.utils.extension.urlToBitmap
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
+    @Inject
+    lateinit var prefUtils: PrefUtils
     private val TAG = "MyFirebaseMessagingServ"
+    var stateNoti = true
+
     override fun onNewToken(token: String) {
         super.onNewToken(token)
         Log.d(TAG, "onNewToken: refreshed token : $token")
     }
 
+    override fun onCreate() {
+        super.onCreate()
+        stateNoti = prefUtils.getPushNotification()
+    }
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         Log.d(TAG, "From: ${remoteMessage.from}")
 
@@ -28,6 +40,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         if (remoteMessage.data.isNotEmpty()) {
             Log.d(TAG, "Message data payload: ${remoteMessage.data}")
+
 
 
             val notificationTitle = remoteMessage.notification?.title ?: "Default Title"
@@ -48,8 +61,13 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 .setColor(Color.parseColor(color))
                 .setPriority(NotificationCompat.PRIORITY_MAX)
 
+            if (stateNoti){
+                Log.d(TAG, "onMessageReceived: notification On")
+                notificationManager.notify(0, builder.build())
+            }else{
+                Log.d(TAG, "onMessageReceived: notification Off")
 
-            notificationManager.notify(0, builder.build())
+            }
         }
 
 

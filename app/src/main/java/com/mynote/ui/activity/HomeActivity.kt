@@ -2,6 +2,7 @@ package com.mynote.ui.activity
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.View.OnClickListener
@@ -23,6 +24,7 @@ import com.mynote.ui.fragment.TasksFragment
 import com.project.app.base.BaseActivity
 import com.project.app.utils.extension.launch
 import com.project.app.utils.extension.loadWithGlide
+import com.project.app.utils.extension.showToast
 import com.project.app.utils.extension.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,6 +39,7 @@ class HomeActivity : BaseActivity(), OnClickListener, OnNavigationItemSelectedLi
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
+
 
         setDrawer(
             ActionBarDrawerToggle(
@@ -60,6 +63,9 @@ class HomeActivity : BaseActivity(), OnClickListener, OnNavigationItemSelectedLi
         })
         binding.navigationView.setCheckedItem(R.id.side_menu_notes)
         loadFragment(HomeFragment(), true)
+
+        onBackPress()
+
     }
 
     private fun setListener() {
@@ -161,5 +167,14 @@ class HomeActivity : BaseActivity(), OnClickListener, OnNavigationItemSelectedLi
         fragmentTransaction.commit()
     }
 
+    fun onBackPress(){
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+
+
+            }
+        })
+    }
 
 }

@@ -121,6 +121,7 @@
     <string name="save">Save</string>
     <string name="colors">Colors</string>
 
+
     <string-array name="spinner_items">
         <item>small</item>
         <item>medium</item>

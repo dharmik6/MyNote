@@ -48,7 +48,23 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
+    fun adjustFontScale(configuration: Configuration, scale: Float) {
+        configuration.fontScale = scale
+        val metrics = resources.displayMetrics
 
+        val wm =
+            this.getSystemService(AppCompatActivity.WINDOW_SERVICE) as WindowManager
+        wm.defaultDisplay.getMetrics(metrics)
+
+        val updatedConfiguration = Configuration(configuration)
+        updatedConfiguration.fontScale = scale
+
+        val context = this.applicationContext.createConfigurationContext(updatedConfiguration)
+
+        this.resources.updateConfiguration(updatedConfiguration, metrics)
+
+        this.recreate()
+    }
 
 
 }

@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:padding="@dimen/_12dp"
     android:gravity="center_vertical"
+    android:elevation="@dimen/_10dp"
     android:clipChildren="false"
     android:clipToPadding="false"
     android:clickable="false"

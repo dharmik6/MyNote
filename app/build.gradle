@@ -55,7 +55,7 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
-
+    implementation 'com.google.firebase:firebase-core:21.1.1'
     implementation(libs.play.services.auth)
 
     //glide for image loading

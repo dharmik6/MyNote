@@ -1,6 +1,7 @@
 package com.mynote.ui.adapter
 
 import android.content.Context
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -11,9 +12,12 @@ class MiniSubItemAdapter (private val context: Context, private val list : List<
     class ViewHolder(val binding : MiniBuyingItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item : NotesParam.Item.SubItem){
             binding.item.text = item.name
-
-            if (item.isChecked != null)
-                binding.checkboxItem.isChecked = item.isChecked!!
+                binding.checkboxItem.isChecked = item.isChecked
+            if (item.isChecked){
+                binding.item.paint.flags = binding.item.paint.flags or Paint.STRIKE_THRU_TEXT_FLAG
+            }else{
+                binding.item.paint.flags = binding.item.paint.flags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+            }
         }
     }
 

@@ -21,6 +21,14 @@ class PrefUtils(private val sharedPreferences: SharedPreferences) {
     fun getTextSize(): Int {
         return sharedPreferences.getInt(AppConstant.TEXT_SIZE, 1)
     }
+    // save push notification from FCM
+    fun savePushNotification(state : Boolean) {
+        sharedPreferences.edit().putBoolean(AppConstant.PUSH_NOTIFICATION, state).apply()
+    }
+
+    fun getPushNotification(): Boolean {
+        return sharedPreferences.getBoolean(AppConstant.PUSH_NOTIFICATION, true)
+    }
 
 
 

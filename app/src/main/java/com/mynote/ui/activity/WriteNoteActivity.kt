@@ -7,8 +7,15 @@ import android.view.View
 import android.view.View.OnClickListener
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.ItemTouchHelper.DOWN
+import androidx.recyclerview.widget.ItemTouchHelper.END
+import androidx.recyclerview.widget.ItemTouchHelper.START
+import androidx.recyclerview.widget.ItemTouchHelper.UP
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.mynote.R
 import com.mynote.data.param.NotesParam
 import com.mynote.databinding.ActivityWriteNoteBinding
@@ -27,14 +34,12 @@ import com.project.app.base.BaseActivity
 import com.project.app.utils.AppConstant
 import com.project.app.utils.PrefUtils
 import com.project.app.utils.extension.getCurrentTimeZone
-import com.project.app.utils.extension.loadWithGlide
 import com.project.app.utils.extension.luciferLog
 import com.project.app.utils.extension.viewBinding
 import com.project.app.utils.resource.Status
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import kotlin.math.log
-
+import kotlin.random.Random
 
 @AndroidEntryPoint
 class WriteNoteActivity : BaseActivity(), OnClickListener, OnColorSelectListener,
@@ -182,9 +187,29 @@ class WriteNoteActivity : BaseActivity(), OnClickListener, OnColorSelectListener
             }
 
             binding.addNote -> {
-                unCheckAdapter.addItem(NotesParam.SubNote())
+                val color : String = randomColor()
+                unCheckAdapter.addItem(NotesParam.SubNote(color = color))
             }
         }
+    }
+
+    private fun randomColor(): String {
+        val colorList = listOf(
+            "#DAF6E4",  // light_green
+            "#FDEBAB",  // light_yellow
+            "#F7F6D4",  // light_yellow_2
+            "#E0F2D7",  // color_1
+            "#F2D3D0",  // color_2
+            "#E3F2DF",  // color_4
+            "#C5D9D5",  // color_5
+            "#a9def9",  // color_6
+            "#e7cee3",  // color_3
+            "#F7DEE3",  // light_red
+            "#EFEEF0",  // light_grey
+            "#EFE9F7"   // primary_light
+        )
+
+        return colorList.get(Random.nextInt(colorList.size))
     }
 
 
@@ -213,16 +238,21 @@ class WriteNoteActivity : BaseActivity(), OnClickListener, OnColorSelectListener
     }
 
     private fun setRecyclerView() {
-        // Initialize RecyclerView with the ViewModel's list
+
+        // buying item
         binding.rvBuyingItem.layoutManager = LinearLayoutManager(this)
-        itemAdapter = BuyingItemAdapter(this, noteViewModel.getItems())
+        itemTouchHelper.attachToRecyclerView(binding.rvBuyingItem)
+
+        itemAdapter = BuyingItemAdapter(this, itemTouchHelper)
         binding.rvBuyingItem.adapter = itemAdapter
 
 
         // goal recyclerview
         binding.rvGoalItem.layoutManager = LinearLayoutManager(this)
-        goalItemAdapter = GoalItemAdapter(this, noteViewModel.getItems())
+        goalItemTouchHelper.attachToRecyclerView(binding.rvGoalItem)
+        goalItemAdapter = GoalItemAdapter(this, goalItemTouchHelper)
         binding.rvGoalItem.adapter = goalItemAdapter
+
 
         // Setup RecyclerViews for both adapters
         binding.rvCheckedItems.layoutManager = LinearLayoutManager(this)
@@ -333,18 +363,16 @@ class WriteNoteActivity : BaseActivity(), OnClickListener, OnColorSelectListener
 
     private fun sendNote() {
         Log.d(TAG, "sendNote: note are save ")
-        if (userId != null)
-            mViewModel.sendNoteData(userId, NotesParamModle())
+        mViewModel.sendNoteData(userId, NotesParamModle())
     }
 
     private fun updateNote() {
         Log.d(TAG, "sendNote: note are update ")
-        if (userId != null)
-            mViewModel.updateNoteData(
-                userId = userId,
-                noteId = noteId!!,
-                notesParam = NotesParamModle()
-            )
+        mViewModel.updateNoteData(
+            userId = userId,
+            noteId = noteId!!,
+            notesParam = NotesParamModle()
+        )
     }
 
     private fun observer() {
@@ -394,6 +422,123 @@ class WriteNoteActivity : BaseActivity(), OnClickListener, OnColorSelectListener
     override fun onSubNoteUnCheckedChangeListener(data: NotesParam.SubNote) {
         Log.d(TAG, "onSubNoteCheckedChangeListener: sub note data = $data")
         unCheckAdapter.addItem(data)
+    }
+
+    private val itemTouchHelper by lazy {
+        val itemTouchCallback =
+            object : ItemTouchHelper.SimpleCallback(UP or DOWN or START or END, 0) {
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ): Boolean {
+                    val recyclerviewAdapter = recyclerView.adapter as BuyingItemAdapter
+                    val fromPosition = viewHolder.adapterPosition
+                    val toPosition = target.adapterPosition
+                    recyclerviewAdapter.moveItem(fromPosition, toPosition)
+                    return true
+                }
+
+
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+
+
+                }
+
+                override fun onSelectedChanged(
+                    viewHolder: RecyclerView.ViewHolder?,
+                    actionState: Int
+                ) {
+                    super.onSelectedChanged(viewHolder, actionState)
+
+                    if (viewHolder is BuyingItemAdapter.ViewHolder) {
+                        viewHolder.binding.main.setCardBackgroundColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.white
+                            )
+                        )
+                        viewHolder.binding.main.strokeWidth = 2
+
+                    }
+                }
+
+                override fun clearView(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder
+                ) {
+                    super.clearView(recyclerView, viewHolder)
+                    if (viewHolder is BuyingItemAdapter.ViewHolder) {
+                        viewHolder.binding.main.setCardBackgroundColor(getColor(R.color.transparent))
+                        viewHolder.binding.main.strokeWidth = 0
+
+                    }
+                }
+
+
+            }
+        ItemTouchHelper(itemTouchCallback)
+    }
+
+
+    private val goalItemTouchHelper by lazy {
+        val itemTouchCallback =
+            object : ItemTouchHelper.SimpleCallback(UP or DOWN or START or END, 0) {
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ): Boolean {
+                    val recyclerviewAdapter = recyclerView.adapter as GoalItemAdapter
+                    val fromPosition = viewHolder.adapterPosition
+                    val toPosition = target.adapterPosition
+                    recyclerviewAdapter.moveItem(fromPosition, toPosition)
+                    return true
+                }
+
+
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+
+                }
+
+                override fun onSelectedChanged(
+                    viewHolder: RecyclerView.ViewHolder?,
+                    actionState: Int
+                ) {
+                    super.onSelectedChanged(viewHolder, actionState)
+                    if (actionState == ItemTouchHelper.ACTION_STATE_DRAG) {
+//                        viewHolder?.itemView?.scaleY = 1.0f
+//                        viewHolder?.itemView?.alpha = 0.7f
+                    }
+                    if (viewHolder is GoalItemAdapter.ViewHolder) {
+                        viewHolder.binding.main.setCardBackgroundColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.white
+                            )
+                        )
+                        viewHolder.binding.main.strokeWidth = 2
+
+                    }
+                }
+
+                override fun clearView(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder
+                ) {
+                    super.clearView(recyclerView, viewHolder)
+//                    viewHolder.itemView.scaleY = 1.0f
+//                    viewHolder.itemView.alpha = 1.0f
+                    if (viewHolder is GoalItemAdapter.ViewHolder) {
+                        viewHolder.binding.main.setCardBackgroundColor(getColor(R.color.transparent))
+                        viewHolder.binding.main.strokeWidth = 0
+
+                    }
+                }
+
+
+            }
+        ItemTouchHelper(itemTouchCallback)
     }
 
 

@@ -22,19 +22,21 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/_10dp"
         android:orientation="vertical">
+
         <TextView
+            style="@style/TextView.Font.Regular.10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/change_background"
-            style="@style/TextView.Font.Regular.10"
             android:layout_marginVertical="@dimen/_5dp"
-            android:textColor="@color/dark_grey"/>
+            android:text="@string/change_background"
+            android:textColor="@color/dark_grey" />
 
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="none"
-            android:scrollIndicators="none">
+            android:scrollIndicators="none"
+            android:scrollbars="none">
+
             <RadioGroup
                 android:id="@+id/rg_color"
                 android:layout_width="wrap_content"
@@ -45,66 +47,71 @@
                     android:id="@+id/rb_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:button="@null"
-                    android:foreground="@drawable/selector_cirlce"
+                    android:layout_margin="@dimen/_10dp"
                     android:background="@drawable/checkbox__1_"
                     android:backgroundTint="@color/white"
-                    android:layout_margin="@dimen/_10dp"/>
+                    android:button="@null"
+                    android:foreground="@drawable/selector_cirlce" />
 
                 <RadioButton
                     android:id="@+id/rb_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:button="@null"
-                    android:foreground="@drawable/selector_cirlce"
+                    android:layout_margin="@dimen/_10dp"
                     android:background="@drawable/checkbox__1_"
                     android:backgroundTint="@color/primary_light"
-                    android:layout_margin="@dimen/_10dp"/>
+                    android:button="@null"
+                    android:foreground="@drawable/selector_cirlce" />
+
                 <RadioButton
                     android:id="@+id/rb_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:button="@null"
+                    android:layout_margin="@dimen/_10dp"
                     android:background="@drawable/checkbox__1_"
                     android:backgroundTint="@color/light_red"
-                    android:foreground="@drawable/selector_cirlce"
-                    android:layout_margin="@dimen/_10dp"/>
+                    android:button="@null"
+                    android:foreground="@drawable/selector_cirlce" />
+
                 <RadioButton
                     android:id="@+id/rb_4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:button="@null"
+                    android:layout_margin="@dimen/_10dp"
                     android:background="@drawable/checkbox__1_"
                     android:backgroundTint="@color/light_green"
-                    android:foreground="@drawable/selector_cirlce"
-                    android:layout_margin="@dimen/_10dp"/>
+                    android:button="@null"
+                    android:foreground="@drawable/selector_cirlce" />
+
                 <RadioButton
                     android:id="@+id/rb_5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:button="@null"
+                    android:layout_margin="@dimen/_10dp"
                     android:background="@drawable/checkbox__1_"
                     android:backgroundTint="@color/light_yellow"
-                    android:foreground="@drawable/selector_cirlce"
-                    android:layout_margin="@dimen/_10dp"/>
+                    android:button="@null"
+                    android:foreground="@drawable/selector_cirlce" />
+
                 <RadioButton
                     android:id="@+id/rb_6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:button="@null"
+                    android:layout_margin="@dimen/_10dp"
                     android:background="@drawable/checkbox__1_"
                     android:backgroundTint="@color/light_yellow_2"
-                    android:foreground="@drawable/selector_cirlce"
-                    android:layout_margin="@dimen/_10dp"/>
+                    android:button="@null"
+                    android:foreground="@drawable/selector_cirlce" />
+
                 <RadioButton
                     android:id="@+id/rb_7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:button="@null"
+                    android:layout_margin="@dimen/_10dp"
                     android:background="@drawable/checkbox__1_"
                     android:backgroundTint="@color/light_grey"
-                    android:foreground="@drawable/selector_cirlce"
-                    android:layout_margin="@dimen/_10dp"/>
+                    android:button="@null"
+                    android:foreground="@drawable/selector_cirlce" />
             </RadioGroup>
         </HorizontalScrollView>
 
@@ -113,15 +120,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/_10dp"
-            app:dividerColor="@color/base_grey"/>
+            app:dividerColor="@color/base_grey" />
 
         <TextView
+            style="@style/TextView.Font.Regular.10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/_10dp"
             android:text="@string/extras"
-            style="@style/TextView.Font.Regular.10"
-            android:textColor="@color/dark_grey"/>
+            android:textColor="@color/dark_grey" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -156,23 +163,23 @@
                 android:id="@+id/note_delete"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="@dimen/_10dp"
                 android:background="?android:attr/selectableItemBackground"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/_10dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/trash"/>
+                    android:src="@drawable/trash" />
 
                 <TextView
+                    style="@style/TextView.Font.Medium.16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_20dp"
                     android:text="@string/delete_note"
-                    style="@style/TextView.Font.Medium.16"
-                    android:textColor="@color/base_red"
-                    android:layout_marginHorizontal="@dimen/_20dp"/>
+                    android:textColor="@color/base_red" />
             </LinearLayout>
         </LinearLayout>
 

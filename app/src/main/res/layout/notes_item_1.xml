@@ -10,29 +10,49 @@
     android:maxHeight="@dimen/_250dp"
     app:cardBackgroundColor="@color/background">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/_10dp"
-        android:maxHeight="@dimen/_250dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/list_title"
-            style="@style/TextView.Font.Bold.18"
+        <LinearLayout
+            android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/_10dp"
-            android:background="@color/transparent"
-            android:text="@string/title"
-            android:textColor="@color/black" />
+            android:layout_margin="@dimen/_10dp"
+            android:clickable="false"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:maxHeight="@dimen/_250dp"
+            android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_mini_list"
+            <TextView
+                android:id="@+id/list_title"
+                style="@style/TextView.Font.Bold.18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_10dp"
+                android:background="@color/transparent"
+                android:text="@string/title"
+                android:textColor="@color/black" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_mini_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:clipChildren="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:nestedScrollingEnabled="true"
+                android:orientation="vertical"
+                tools:listitem="@layout/mini_buying_item" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/clickableView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            tools:listitem="@layout/mini_buying_item" />
-
-    </LinearLayout>
+            android:layout_height="match_parent"
+             />
+    </FrameLayout>
 </com.google.android.material.card.MaterialCardView>

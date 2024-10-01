@@ -3,6 +3,7 @@ package com.mynote.data.param
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import java.util.UUID
 
 data class NotesParam(
     @SerializedName("createdAt")
@@ -95,7 +96,8 @@ var isSelected: Boolean = false
         @SerializedName("subItems")
         var subItems: List<SubItem?>? = null,
         @SerializedName("name")
-        var name: String? = null
+        var name: String? = null,
+        var uniqueId: Long = UUID.randomUUID().mostSignificantBits and Long.MAX_VALUE
     ) : Parcelable {
 
         fun toMap(): Map<String, Any?> {
@@ -138,7 +140,8 @@ var isSelected: Boolean = false
             @SerializedName("isChecked")
             var isChecked: Boolean = false,
             @SerializedName("name")
-            var name: String? = null
+            var name: String? = null,
+            var uniqueId: Long = UUID.randomUUID().mostSignificantBits and Long.MAX_VALUE
         ) : Parcelable {
 
             fun toMap(): Map<String, Any?> {
@@ -180,27 +183,33 @@ var isSelected: Boolean = false
         @SerializedName("noteText")
         var noteText: String? = null,
         @SerializedName("title")
-        var title: String? = null
+        var title: String? = null,
+        @SerializedName("color")
+        var color: String? = null,
+        var uniqueId: Long = UUID.randomUUID().mostSignificantBits and Long.MAX_VALUE
     ) : Parcelable {
 
         fun toMap(): Map<String, Any?> {
             return mapOf(
                 "checked" to isChecked,
                 "noteTextF" to noteText,
-                "title" to title
+                "title" to title,
+                "color" to color
             )
         }
 
         constructor(parcel: Parcel) : this(
             parcel.readValue(Boolean::class.java.classLoader) as Boolean,
             parcel.readString(),
-            parcel.readString()
+            parcel.readString(),
+            parcel.readString(),
         )
 
         override fun writeToParcel(parcel: Parcel, flags: Int) {
             parcel.writeValue(isChecked)
             parcel.writeString(noteText)
             parcel.writeString(title)
+            parcel.writeString(color)
         }
 
         override fun describeContents(): Int {

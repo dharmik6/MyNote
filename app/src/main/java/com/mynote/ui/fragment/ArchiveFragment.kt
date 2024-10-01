@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -43,13 +44,13 @@ class ArchiveFragment : BaseFragment(), OnClickListener, LongClickListener, OnCo
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         setRecyclerView()
         getData()
         observer()
         setupSwipeToRefresh()
         setListener()
-
+        onBackPress()
         (activity as HomeActivity).binding.layout.setOnCheckedChangeListener { btn, ischecked ->
 
             if (ischecked) {
@@ -261,5 +262,25 @@ class ArchiveFragment : BaseFragment(), OnClickListener, LongClickListener, OnCo
 
     }
 
+    fun onBackPress(){
+
+        requireActivity().onBackPressedDispatcher.addCallback(requireActivity(), object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val homeActivity = activity as? HomeActivity
+                homeActivity?.let {
+                    if (it.binding.viewAnimatorToolbar.displayedChild == 1) {
+                        it.binding.viewAnimatorToolbar.displayedChild = 0
+                        adapter.isMenuOpen = false
+                        adapter.deSelectList()
+                    } else {
+                        this.isEnabled = false
+                        requireActivity().onBackPressedDispatcher.onBackPressed()
+                        this.isEnabled = true
+                    }
+                } ?: requireActivity().finish()
+            }
+        })
+
+    }
 
 }

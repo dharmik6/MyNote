@@ -34,7 +34,6 @@ class IdeaAdapter(
             if (!item.color.isNullOrBlank()) {
                 binding.main.setCardBackgroundColor(Color.parseColor(item.color))
             }
-
         }
     }
 

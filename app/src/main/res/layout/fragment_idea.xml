@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:measureAllChildren="true"
-        android:paddingHorizontal="@dimen/_20dp">
+        android:paddingHorizontal="@dimen/_10dp">
 
 
 

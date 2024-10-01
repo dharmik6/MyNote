@@ -52,6 +52,12 @@ class TaskAdapter(private val context: Context, private val list: MutableList<No
             true
         };
 
+        holder.binding.clickableView.setOnClickListener {
+            holder.itemView.performClick()
+        }
+        holder.binding.clickableView.setOnLongClickListener {
+            holder.itemView.performLongClick()
+        }
 
         holder.itemView.setOnClickListener {
             if (isMenuOpen){

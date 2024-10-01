@@ -65,7 +65,6 @@ class LoginActivity : BaseActivity() , OnClickListener {
                 }
             }
             binding.btnGoogle -> {
-                // Sign out or revoke access to ensure the login screen is shown again
                 googleSignInClient.signOut().addOnCompleteListener(this) {
                     val signInIntent = googleSignInClient.signInIntent
                     startActivityForResult(signInIntent, AppConstant.GOOGLE_REQUEST_CODE)
@@ -130,16 +129,18 @@ class LoginActivity : BaseActivity() , OnClickListener {
         }
         mViewModel.googleSignInLiveData.observe(this){ state ->
             when(state.status){
+
                 Status.SUCCESS -> {
+                    hideProgress()
                     if (state.data != null){
                         prefUtils.saveAuthToken(state.data.uid)
 
-                        createUser(state.data)
+                        updateUser(state.data)
 
                     }else{
                         showToast(getString(R.string.something_went_wrong))
                     }
-                    hideProgress()
+
                 }
                 Status.ERROR -> {
                     val error = state.error
@@ -163,6 +164,37 @@ class LoginActivity : BaseActivity() , OnClickListener {
             mViewModel.insertOrUpdateUser(userId,userData)
 
         mViewModel.insertOrUpdateUserLiveData.observe(this){ state ->
+            when(state.status){
+                Status.SUCCESS -> {
+                    if (state.data == true){
+                        launch<HomeActivity>()
+                        finish()
+                    }else{
+                        showToast(getString(R.string.something_went_wrong))
+                    }
+                    hideProgress()
+                }
+                Status.ERROR -> {
+                    val error = state.error
+                    luciferLog(error?.errorMessage)
+                    showToast(error?.errorMessage ?: "")
+                    hideProgress()
+                }
+                Status.LOADING -> {
+                    showProgress()
+                }
+            }
+        }
+    }
+    private fun updateUser(data: FirebaseUser) {
+
+        val userId = prefUtils.getAuthToken()
+        val userData = UserDataParam(name = data.displayName, email = data.email)
+        Log.d(TAG, "updateUserData: userData = $userData")
+        if (userId != null)
+            mViewModel.updateUser(userId,userData)
+
+        mViewModel.updateUserLiveData.observe(this){ state ->
             when(state.status){
                 Status.SUCCESS -> {
                     if (state.data == true){

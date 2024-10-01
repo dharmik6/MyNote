@@ -2,23 +2,32 @@ package com.mynote.ui.adapter
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Paint
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.EditorInfo
+import androidx.core.view.isGone
 import androidx.recyclerview.widget.RecyclerView
 import com.mynote.R
 import com.mynote.data.param.NotesParam
 import com.mynote.databinding.BuyingItemBinding
 import com.mynote.databinding.GoalsItemBinding
+import com.project.app.utils.extension.showSoftKeyboard
+import dagger.Binds
 
 class SubItemAdapter(
     private val context: Context,
     private var list: MutableList<NotesParam.Item.SubItem?>
 ) : RecyclerView.Adapter<SubItemAdapter.SubItemViewHolder>() {
+
+    private  val TAG = "SubItemAdapter"
 
     private var newlyAddedPosition: Int? = null
 
@@ -29,15 +38,35 @@ class SubItemAdapter(
         fun bind(subItem: NotesParam.Item.SubItem?, onSubItemChanged: (NotesParam.Item.SubItem, Int) -> Unit, position: Int) {
             if (subItem != null) {
                 // Set sub-item name
-                binding.itemText.setText(subItem.name)
+
 
                 // Set sub-item checkbox state
                 binding.itemCheckbox.isChecked = subItem.isChecked ?: false
+
+                if (subItem.isChecked) {
+                    binding.itemText.paintFlags = binding.itemText.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                    binding.itemText.setText(subItem.name)
+
+                } else {
+                    binding.itemText.paintFlags = binding.itemText.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                    binding.itemText.setText(subItem.name)
+
+                }
 
                 // Handle checkbox toggle event for the sub-item
                 binding.itemCheckbox.setOnCheckedChangeListener { _, isChecked ->
                     subItem.isChecked = isChecked
                     onSubItemChanged(subItem, position) // Notify that the sub-item has changed
+
+                    if (isChecked) {
+                        binding.itemText.paintFlags = binding.itemText.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                        binding.itemText.setText(binding.itemText.text) // Set the text again to apply the change
+
+                    } else {
+                        binding.itemText.paintFlags = binding.itemText.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                        binding.itemText.setText(binding.itemText.text) // Set the text again to apply the change
+
+                    }
                 }
 
                 // Handle text change for the sub-item
@@ -54,6 +83,7 @@ class SubItemAdapter(
         }
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubItemViewHolder {
         val binding = BuyingItemBinding.inflate(LayoutInflater.from(context), parent, false)
         return SubItemViewHolder(binding)
@@ -63,42 +93,60 @@ class SubItemAdapter(
 
     override fun onBindViewHolder(holder: SubItemViewHolder, position: Int) {
         holder.bind(list[position], this::updateSubItem, position)
+        holder.binding.dragDrop.isGone = true
 
         val animation = AnimationUtils.loadAnimation(context, R.anim.slide_in_left)
         holder.itemView.startAnimation(animation)
 
         // Handle trash icon click to remove item
         holder.binding.trash.setOnClickListener {
-            removeItem(holder.itemView , position)
+            removeItem( position)
         }
+
 
 
         if (position == newlyAddedPosition) {
             holder.binding.itemText.requestFocus()
+            holder.binding.itemText.post {
+                if (holder.binding.itemText.hasFocus()) {
+                    Log.d("BuyingItemAdapter", "View has gained focus, attempting to show keyboard.")
+                    context.showSoftKeyboard(holder.binding.itemText)
+                } else {
+                    Log.d("BuyingItemAdapter", "View did not gain focus after request.")
+                }
+            }
             newlyAddedPosition = null // Reset the position after focusing
+        }
+
+        holder.binding.itemText.setOnEditorActionListener { _, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_NEXT ||
+                (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN)) {
+                Log.d(TAG, "Enter key pressed in onEditorActionListener")
+                addSubItem(NotesParam.Item.SubItem())
+                true
+            } else {
+                false
+            }
+        }
+
+        holder.binding.itemText.setOnKeyListener { v, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DEL) {
+                if (position > 0){
+                    removeItem(position)
+                    Log.d("KeyboardAction", "Backspace pressed at position: $position")
+                }
+                true
+            } else {
+                false
+            }
         }
     }
 
-    private fun removeItem(view: View, position: Int) {
+    private fun removeItem( position: Int) {
         if (position < list.size) {
-            val animation = AnimationUtils.loadAnimation(context, R.anim.slide_out_left)
-            view.startAnimation(animation)
-            animation.setAnimationListener(object : Animation.AnimationListener {
-                override fun onAnimationStart(animation: Animation?) {
-                    // If you don't need to do anything at the start of the animation, leave this empty.
-                }
-
-                override fun onAnimationEnd(animation: Animation?) {
-                    // Remove the item after the animation ends
-                    list.removeAt(position)
-                    notifyItemRemoved(position)
-                    notifyItemRangeChanged(position, list.size)
-                }
-
-                override fun onAnimationRepeat(animation: Animation?) {
-                    // If not needed, leave this empty too
-                }
-            })
+            list.removeAt(position)
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(position, list.size)
         }
 
     }

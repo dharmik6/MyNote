@@ -21,6 +21,7 @@ object AppConstant {
     //pref keys
     const val CONSTANT_AUTH = "constant_auth"
     const val TEXT_SIZE = "text_size"
+    const val PUSH_NOTIFICATION = "push_notification"
     const val USER_DATA = "user_data"
     const val PREF_KEY = "vidLin_pref"
     const val IS_NOTIFICATION_ON = "is_notification_on"

@@ -1,15 +1,20 @@
 package com.mynote.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.OnBackPressedDispatcher
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.mynote.R
 import com.mynote.databinding.FragmentHomeBinding
 import com.mynote.interfaces.LongClickListener
 import com.mynote.interfaces.OnColorSelectListener
@@ -19,6 +24,7 @@ import com.mynote.ui.dialog.ColorDialog
 import com.mynote.viewmodel.FirebaseUserViewModel
 import com.project.app.base.BaseFragment
 import com.project.app.utils.PrefUtils
+import com.project.app.utils.extension.luciferLog
 import com.project.app.utils.extension.showToast
 import com.project.app.utils.extension.viewBinding
 import com.project.app.utils.resource.Status
@@ -26,7 +32,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment(), OnClickListener, LongClickListener, OnColorSelectListener {
+class HomeFragment : BaseFragment(), OnClickListener, LongClickListener, OnColorSelectListener  {
 
     @Inject
     lateinit var prefUtils: PrefUtils
@@ -47,6 +53,8 @@ class HomeFragment : BaseFragment(), OnClickListener, LongClickListener, OnColor
         setupSwipeToRefresh()
         setListener()
 
+
+
         (activity as HomeActivity).binding.layout.setOnCheckedChangeListener { btn, ischecked ->
 
             if (ischecked) {
@@ -59,8 +67,11 @@ class HomeFragment : BaseFragment(), OnClickListener, LongClickListener, OnColor
             getData()
         }
 
+        onBackPress()
+
         return binding.root
     }
+
 
 
     private fun setListener() {
@@ -133,6 +144,7 @@ class HomeFragment : BaseFragment(), OnClickListener, LongClickListener, OnColor
         adapter = NotesAdapter(requireContext(), mutableListOf(), this)
 
         binding.rvNotesList.adapter = adapter
+
     }
 
     fun getData() {
@@ -225,6 +237,29 @@ class HomeFragment : BaseFragment(), OnClickListener, LongClickListener, OnColor
             }
         }
     }
+
+    fun onBackPress(){
+
+        requireActivity().onBackPressedDispatcher.addCallback(requireActivity(), object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val homeActivity = activity as? HomeActivity
+                homeActivity?.let {
+                    if (it.binding.viewAnimatorToolbar.displayedChild == 1) {
+                        it.binding.viewAnimatorToolbar.displayedChild = 0
+                        adapter.isMenuOpen = false
+                        adapter.deSelectList()
+                    } else {
+                        this.isEnabled = false
+                        requireActivity().onBackPressedDispatcher.onBackPressed()
+                        this.isEnabled = true
+                    }
+                } ?: requireActivity().finish()
+            }
+        })
+
+    }
+
+
 
     override fun onItemLongClicked(position: Int, holder: RecyclerView.ViewHolder) {
         (activity as? HomeActivity)!!.binding.viewAnimatorToolbar.displayedChild = 1

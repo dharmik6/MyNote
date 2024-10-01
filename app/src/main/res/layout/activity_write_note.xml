@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@color/white"
     android:paddingTop="@dimen/_20dp"
     tools:context=".ui.activity.WriteNoteActivity">
 
@@ -227,13 +227,7 @@
                 </LinearLayout>
 
             <!--  page 3-->
-
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:scrollbars="none"
-                android:scrollIndicators="none"
-                android:overScrollMode="never"
-                android:layout_height="match_parent">
+            
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -293,9 +287,6 @@
                         android:nestedScrollingEnabled="true"
                         tools:listitem="@layout/notes_sub_item" />
                 </LinearLayout>
-            </androidx.core.widget.NestedScrollView>
-
-
 
         </ViewAnimator>
 
@@ -361,6 +352,7 @@
             android:layout_marginEnd="@dimen/_20dp"
             android:layout_toStartOf="@+id/menu"
             android:background="@drawable/selector_pin"
+            android:visibility="gone"
             android:button="@null" />
 
         <ImageView

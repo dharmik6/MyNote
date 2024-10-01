@@ -1,39 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?android:attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
     android:paddingHorizontal="@dimen/_12dp"
     android:paddingVertical="@dimen/_2dp"
-    android:background="?android:attr/selectableItemBackground"
-    android:orientation="horizontal"
-    android:gravity="center_vertical"
-    android:weightSum="5">
+    android:weightSum="5"
+    app:cardBackgroundColor="@color/transparent"
+    android:elevation="@dimen/_10dp"
+    android:layout_marginVertical="@dimen/_2dp"
+    app:strokeWidth="@dimen/_0dp"
+    android:id="@+id/main">
 
-    <CheckBox
-        android:id="@+id/item_checkbox"
-        android:layout_width="@dimen/_22dp"
-        android:layout_height="@dimen/_22dp"
-        android:background="@drawable/selector_notes_check_2"
-        android:button="@null"/>
-    <EditText
-        android:id="@+id/item_text"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/TextView.Font.Medium.16"
-        android:hint="@string/item_name"
-        android:layout_weight="5"
-        android:background="@color/transparent"
-        android:layout_marginHorizontal="@dimen/_10dp"
-        android:textColor="@color/black"/>
+        android:weightSum="5"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/trash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/delete_icon"
-        android:background="@drawable/ripple_effect"
-        app:tint="@color/dark_grey"
-        android:padding="@dimen/_8dp"
-        android:layout_weight="1"/>
-</LinearLayout>
+        <ImageView
+            android:id="@+id/drag_drop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/grip_vertical"
+            android:paddingEnd="@dimen/_10dp"/>
+
+        <CheckBox
+            android:id="@+id/item_checkbox"
+            android:layout_width="@dimen/_22dp"
+            android:layout_height="@dimen/_22dp"
+            android:background="@drawable/selector_notes_check_2"
+            android:button="@null" />
+
+        <EditText
+            android:id="@+id/item_text"
+            style="@style/TextView.Font.Medium.16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10dp"
+            android:layout_weight="5"
+            android:background="@color/transparent"
+            android:focusable="true"
+            android:hint="@string/item_name"
+            android:focusableInTouchMode="true"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:textColor="@color/black" />
+
+
+        <ImageView
+            android:id="@+id/trash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/ripple_effect"
+            android:padding="@dimen/_8dp"
+            android:src="@drawable/delete_icon"
+            app:tint="@color/dark_grey" />
+
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

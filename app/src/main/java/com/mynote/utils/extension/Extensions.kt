@@ -19,6 +19,7 @@ import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -31,8 +32,11 @@ import androidx.annotation.RawRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
@@ -380,6 +384,31 @@ fun urlToBitmap(urlString: String): Bitmap {
     return BitmapFactory.decodeStream(url.openConnection().getInputStream())
 }
 
+
+///////////////////////////////////////////////////////////////////////////
+// getCurrentTime
+///////////////////////////////////////////////////////////////////////////
+
+fun AppCompatActivity.showSoftKeyboard(view: View) {
+    if (view.requestFocus()) {
+        val imm = getSystemService(InputMethodManager::class.java)
+        imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+    }
+}
+
+fun Fragment.showSoftKeyboard(view: View) {
+    if (view.requestFocus()) {
+        val imm = requireContext().getSystemService(InputMethodManager::class.java)
+        imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+    }
+}
+
+fun Context.showSoftKeyboard(view: View) {
+    if (view.requestFocus()) {
+        val imm = getSystemService(InputMethodManager::class.java)
+        imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+    }
+}
 
 ///////////////////////////////////////////////////////////////////////////
 // getCurrentTime

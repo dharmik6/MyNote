@@ -1,5 +1,6 @@
 package com.mynote.ui.activity
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -28,6 +29,8 @@ class SplashActivity : BaseActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
 
+
+
         // hide the status bar
         getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -50,4 +53,6 @@ class SplashActivity : BaseActivity() {
             finish()
         }, 3000)
     }
+
+
 }

@@ -1,6 +1,8 @@
 package com.mynote.ui.adapter
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -11,11 +13,9 @@ class MiniSubNoteUnCheckedAdapter(private val context: Context, private val list
     class ViewHolder(val binding : MiniNotesSubItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item : NotesParam.SubNote){
             binding.title.text = item.title
-
-            if (item.isChecked != null)
-                binding.noteCheck.isChecked = item.isChecked!!
-
-
+                binding.noteCheck.isChecked = item.isChecked
+            binding.title.paint.flags = binding.title.paint.flags or Paint.STRIKE_THRU_TEXT_FLAG
+            binding.mainCard.setCardBackgroundColor(Color.parseColor(item.color))
         }
     }
 

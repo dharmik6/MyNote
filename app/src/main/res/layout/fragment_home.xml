@@ -9,7 +9,6 @@
     android:background="@color/background"
     android:id="@+id/home_swipe">
 
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -18,8 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:measureAllChildren="true"
-            android:paddingHorizontal="@dimen/_20dp">
-
+            android:paddingHorizontal="@dimen/_10dp">
             <!--        0-->
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -62,6 +60,9 @@
                 android:id="@+id/rv_notes_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
                 tools:listitem="@layout/notes_item" />
 

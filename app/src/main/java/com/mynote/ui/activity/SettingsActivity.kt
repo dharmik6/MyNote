@@ -27,7 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SettingsActivity : BaseActivity(), OnClickListener {
+class SettingsActivity : BaseActivity(), OnClickListener  {
 
     @Inject
     lateinit var prefUtils: PrefUtils
@@ -39,6 +39,18 @@ class SettingsActivity : BaseActivity(), OnClickListener {
         enableEdgeToEdge()
         setContentView(binding.root)
 
+        val textSize = prefUtils.getTextSize()
+        when(textSize){
+            0 -> {
+                binding.textSize.text = "Small"
+            }
+            1 -> {
+                binding.textSize.text = "Medium"
+            }
+            2 -> {
+                binding.textSize.text = "Large"
+            }
+        }
         getData()
         observer()
         setListener()
